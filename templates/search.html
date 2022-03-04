@@ -1,0 +1,12 @@
+<h1>Search products</h1>
+
+<!-- Input text field for user to type in text -->
+<form action="/search_results/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="text" name="search_bar"/>
+    <input type="submit" value="Search"/>
+</form>
+
+<!-- Upon clicking 'Back', go back to the site's root page -->
+<form action="/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Back"/>
+</form>

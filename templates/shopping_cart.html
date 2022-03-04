@@ -1,0 +1,47 @@
+<head>
+
+<!-- Set table border style -->
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+</style>
+</head>
+
+<!-- Declare function that displays a popup once the user successfully checks out -->
+<script>
+    function check_out() {
+        alert("Purchase successful!");
+    }
+</script>
+
+<h1>Your cart:</h1>
+
+<!-- Create table for displaying all current cart items -->
+<table>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    {% for item in all_items %}
+    <tr>
+        <td style="text-align: left">{{item.item_name}}</td>
+        <td style="text-align: left">${{item.item_price}}</td>
+        <td>
+            <form action="/delete/{{item.id}}/" style="display: inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Remove"/>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Upon clicking 'Search', launch the site's 'search' page and function -->
+<form action="/search/" style="display: inline;" method="post">{% csrf_token %}
+    <input type="submit" value="Search for products"/>
+</form>
+
+<!-- Upon clicking 'Check out', remove all items from cart -->
+<form action="/checkout/" style="display: inline;" method="post" onsubmit="check_out()">{% csrf_token %}
+    <input type="submit" value="Check out"/>
+</form>
